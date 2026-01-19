@@ -1,7 +1,7 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsService } from '../../services/products.service';
-import { Product } from '../../../../shared/models/product.model';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-product-list',

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { NavButton } from '../../../shared/models/nav.interface';
+import { NavButton } from '../models/nav.interface';
 import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
 
 @Component({
