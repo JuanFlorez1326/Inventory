@@ -13,7 +13,7 @@
     "start:debug": "nest start gateway --debug --watch",
     "start:prod": "node dist/main",
     "start:gateway": "npm run build && node dist/apps/gateway/gateway/src/main",
-    "start:products": "npm run build && node dist/apps/products/products/src/main",
+    "start:products": "npx nest build products && node dist/apps/products/products/src/main",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
