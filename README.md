@@ -18,81 +18,158 @@
     <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Sistema de Inventario (NestJS + Microservicios)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Proyecto para gestionar un inventario de productos usando arquitectura de microservicios con NestJS.
 
-## Project setup
+## Arquitectura
 
-```bash
-$ npm install
-```
+- **API Gateway** (HTTP, puerto 3000): expone los endpoints REST.
+- **Microservicio de Productos** (TCP, puerto 3001): lógica de negocio.
+- **PostgreSQL** (puerto 5432): base de datos orquestada con Docker.
 
-## Compile and run the project
+## Requisitos
 
-```bash
-# development
-$ npm run start
+- Node.js 18+
+- Docker y Docker Compose
+- npm
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
+## Instalación
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# Instalar dependencias
+npm install
 ```
 
-## Deployment
+## Configuración
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Crear un archivo `.env` en la raíz del proyecto con las siguientes variables:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+```env
+# Base de datos
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+DB_DATABASE=inventory_db
+
+# Microservicio de Productos
+PRODUCTS_SERVICE_HOST=localhost
+PRODUCTS_SERVICE_PORT=3001
+
+# API Gateway
+API_GATEWAY_PORT=3000
+```
+
+## Ejecución Local
+
+### 1. Levantar la base de datos con Docker
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+docker run --name postgres-inventory -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=inventory_db -p 5432:5432 -d postgres
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 2. Iniciar el microservicio de productos
 
-## Resources
+```bash
+npm run start:dev products
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### 3. Iniciar el API Gateway
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+npm run start:dev gateway
+```
 
-## Support
+La API estará disponible en: `http://localhost:3000`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Ejecución con Docker Compose
 
-## Stay in touch
+```bash
+# Levantar todos los servicios
+docker-compose up -d
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Ver logs
+docker-compose logs -f
 
-## License
+# Detener servicios
+docker-compose down
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+La API estará disponible en: `http://localhost:3000`
+
+## Endpoints
+
+### 1. Listar todos los productos
+
+**GET** `/api/products`
+
+**Respuesta exitosa (200):**
+```json
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "Laptop HP",
+    "price": 899.99,
+    "stock": 15
+  },
+  {
+    "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+    "name": "Mouse Logitech",
+    "price": 25.50,
+    "stock": 50
+  }
+]
+```
+
+### 2. Crear un producto
+
+**POST** `/api/products`
+
+**Body (JSON):**
+```json
+{
+  "name": "Teclado Mecánico",
+  "price": 129.99,
+  "stock": 30
+}
+```
+
+**Respuesta exitosa (201):**
+```json
+{
+  "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+  "name": "Teclado Mecánico",
+  "price": 129.99,
+  "stock": 30
+}
+```
+
+### 3. Eliminar un producto
+
+**DELETE** `/api/products/:id`
+
+**Respuesta exitosa (200):**
+```json
+{
+  "message": "Producto eliminado exitosamente"
+}
+```
+
+## Modelo de Datos
+
+### Tabla: products
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `id` | UUID | Identificador único (clave primaria) |
+| `name` | VARCHAR | Nombre del producto (requerido) |
+| `price` | DECIMAL | Precio del producto (requerido) |
+| `stock` | INTEGER | Cantidad en inventario (requerido) |
+
+## Solución de Problemas
+
+- **No conecta a la BD**: Verifica que el contenedor de PostgreSQL esté ejecutándose con `docker ps` y espera unos segundos después de iniciarlo.
+- **El Gateway no responde**: Asegúrate de iniciar primero el microservicio de productos (puerto 3001) antes del Gateway.
+- **Errores de dependencias**: Ejecuta `npm install --legacy-peer-deps` para resolver conflictos de versiones.
