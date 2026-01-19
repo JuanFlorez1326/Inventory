@@ -8,9 +8,9 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
+    "start": "nest start gateway",
+    "start:dev": "nest start gateway --watch",
+    "start:debug": "nest start gateway --debug --watch",
     "start:prod": "node dist/main",
     "start:gateway": "nest start gateway --watch",
     "start:products": "nest start products --watch",

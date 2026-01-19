@@ -7,7 +7,6 @@ module.exports = {
   },
   collectCoverageFrom: [
     'apps/**/*.(t|j)s',
-    'src/**/*.(t|j)s',
     '!**/*.module.ts',
     '!**/main.ts',
     '!**/index.ts',
@@ -17,9 +16,6 @@ module.exports = {
   ],
   coverageDirectory: './coverage',
   testEnvironment: 'node',
-  roots: ['<rootDir>/apps/', '<rootDir>/src/'],
-  moduleNameMapper: {
-    '^src/(.*)$': '<rootDir>/src/$1',
-  },
+  roots: ['<rootDir>/apps/'],
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
 };

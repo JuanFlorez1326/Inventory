@@ -23,7 +23,6 @@ services:
     ports:
       - "3100:3000"
     depends_on:
-      - postgres
       - products-service
     environment:
       - NODE_ENV=development
