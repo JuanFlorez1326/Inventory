@@ -15,6 +15,5 @@ async function bootstrap() {
   );
 
   await app.listen();
-  console.log('Products microservice is listening on port 3001');
 }
 bootstrap();

@@ -31,7 +31,7 @@ Proyecto para gestionar un inventario de productos usando arquitectura de micros
 
 ## Requisitos
 
-- Node.js 18+
+- Node.js 20+
 - Docker y Docker Compose
 - npm
 
@@ -64,22 +64,44 @@ API_GATEWAY_PORT=3000
 
 ## Ejecución Local
 
-### 1. Levantar la base de datos con Docker
+### Opción 1: Sin Docker (Node.js local)
 
+#### Prerequisitos:
+- PostgreSQL ejecutándose en tu máquina (puerto 5432)
+- O levantar solo PostgreSQL con Docker:
+
+**Terminal 1 - Base de Datos:**
 ```bash
 docker run --name postgres-inventory -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=inventory_db -p 5432:5432 -d postgres
 ```
 
-### 2. Iniciar el microservicio de productos
+> **Nota:** Este comando crea un contenedor PostgreSQL con la BD `inventory_db`. Espera unos segundos a que se inicie completamente antes de ejecutar los servicios.
 
+#### Iniciar los servicios:
+
+**Terminal 2 - API Gateway:**
 ```bash
-npm run start:dev products
+npm run start:gateway
 ```
 
-### 3. Iniciar el API Gateway
+**Terminal 3 - Microservicio de Productos:**
+```bash
+npm run start:products
+```
+
+La API estará disponible en: `http://localhost:3000`
+
+### Opción 2: Con Docker Compose (Recomendado)
 
 ```bash
-npm run start:dev gateway
+# Levantar todos los servicios (Gateway, Productos, PostgreSQL)
+docker-compose up
+
+# Ver logs
+docker-compose logs -f
+
+# Detener servicios
+docker-compose down
 ```
 
 La API estará disponible en: `http://localhost:3000`
@@ -101,21 +123,6 @@ npm run test:watch
 
 - Gateway / App raíz: `http://localhost:3000/api/swagger`
 - Incluye ejemplos de request/response y schemas de productos.
-
-## Ejecución con Docker Compose
-
-```bash
-# Levantar todos los servicios
-docker-compose up -d
-
-# Ver logs
-docker-compose logs -f
-
-# Detener servicios
-docker-compose down
-```
-
-La API estará disponible en: `http://localhost:3000`
 
 ## Endpoints
 
