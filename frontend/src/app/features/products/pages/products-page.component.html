@@ -1,0 +1,16 @@
+<div class="products-container">
+  <nav class="products-nav">
+    @for (button of buttons; track button.view) {
+      <button 
+        class="nav-btn" 
+        [class.active]="currentView() === button.view"
+        (click)="navigate(button.view)">
+        {{ button.label }}
+      </button>
+    }
+  </nav>
+
+  <div class="view-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,1 +1,37 @@
-<p>product-list works!</p>
+<div class="product-list">
+  <h2>Lista de Productos</h2>
+  
+    @if (products().length > 0) {
+        <table class="products-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (product of products(); track product.id) {
+                <tr>
+                    <td class="id-cell">{{ product.id | uppercase }}</td>
+                    <td>{{ product.name | uppercase}}</td>
+                    <td>${{ product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                    <td class="actions-cell">
+                        <button 
+                            class="delete-btn" 
+                            (click)="deleteProduct(product.id)"
+                            title="Eliminar producto">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    } @else {
+        <p class="no-products">No hay productos disponibles</p>
+    }
+</div>
