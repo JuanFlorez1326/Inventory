@@ -21,11 +21,12 @@ services:
       dockerfile: Dockerfile.gateway
     container_name: api_gateway
     ports:
-      - "3100:3000"
+      - "3000:3000"
     depends_on:
       - products-service
     environment:
       - NODE_ENV=development
+      - PORT=3000
       - PRODUCTS_SERVICE_HOST=products-service
       - PRODUCTS_SERVICE_PORT=3001
     networks:

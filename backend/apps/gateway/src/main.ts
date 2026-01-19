@@ -27,7 +27,10 @@ async function bootstrap() {
     swaggerOptions: { persistAuthorization: true },
   });
 
-  await app.listen(3000);
-  console.log('API Gateway is running on http://localhost:3000');
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
+  
+  console.log(`API Gateway: http://localhost:${port}/api`);
+  console.log(`Swagger: http://localhost:${port}/api/swagger`);
 }
 bootstrap();
