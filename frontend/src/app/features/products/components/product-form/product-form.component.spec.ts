@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductForm } from './product-form';
+import { ProductForm } from './product-form.component';
 
 describe('ProductForm', () => {
   let component: ProductForm;

@@ -1,1 +1,59 @@
-<p>product-form works!</p>
+<div class="product-form">
+  <h2>Crear Nuevo Producto</h2>
+  
+  <form [formGroup]="productForm" (ngSubmit)="submitForm()" class="form-container">
+    <div class="form-group">
+      <label for="name">Nombre del Producto</label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        required
+        placeholder="Ingresa el nombre del producto"
+      />
+      @if (productForm.get('name')?.hasError('required') && productForm.get('name')?.touched) {
+        <span class="error-message">El nombre es requerido</span>
+      }
+      @if (productForm.get('name')?.hasError('minlength') && productForm.get('name')?.touched) {
+        <span class="error-message">El nombre debe tener al menos 3 caracteres</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="price">Precio</label>
+      <input
+        id="price"
+        type="number"
+        formControlName="price"
+        required
+        placeholder="Ingresa el precio"
+      />
+      @if (productForm.get('price')?.hasError('required') && productForm.get('price')?.touched) {
+        <span class="error-message">El precio es requerido</span>
+      }
+      @if (productForm.get('price')?.hasError('min') && productForm.get('price')?.touched) {
+        <span class="error-message">El precio debe ser mayor a 0</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="stock">Stock</label>
+      <input
+        id="stock"
+        type="number"
+        formControlName="stock"
+        required
+        placeholder="Ingresa la cantidad en stock"
+      />
+      @if (productForm.get('stock')?.hasError('required') && productForm.get('stock')?.touched) {
+        <span class="error-message">El stock es requerido</span>
+      }
+      @if (productForm.get('stock')?.hasError('min') && productForm.get('stock')?.touched) {
+        <span class="error-message">El stock debe ser mayor a 0</span>
+      }
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="!productForm.valid">Guardar Producto</button>
+  </form>
+</div>
+
