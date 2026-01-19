@@ -32,6 +32,7 @@ Aplicación web moderna con:
 
 ## Requisitos Previos
 - Angular 20+
+- Nest.js 11+
 - Node.js 20+
 - Docker y Docker Compose
 - npm
@@ -58,7 +59,7 @@ Luego accede a `http://localhost:4200/` para usar la aplicación.
 
 ## Tecnologías
 
-- **Backend**: NestJS, Microservicios, TCP
-- **Frontend**: Angular, TypeScript, SCSS
-- **Datos**: PostgreSQL
+- **Base de Datos**: PostgreSQL
+- **Frontend**: Angular 20, TypeScript, SCSS
+- **Backend**: NestJS 11, Microservicios, TCP, TypeORM
 - **Contenedorización**: Docker, Docker Compose
