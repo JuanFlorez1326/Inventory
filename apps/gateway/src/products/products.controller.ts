@@ -10,6 +10,7 @@ import {
 import { ClientProxy } from '@nestjs/microservices';
 import { CreateProductDto } from './dto/create-product.dto';
 import { firstValueFrom } from 'rxjs';
+import { Product } from './interfaces/product.interface';
 
 @Controller('products')
 export class ProductsController {
@@ -18,7 +19,7 @@ export class ProductsController {
   ) {}
 
   @Get()
-  async getProducts(): Promise<any> {
+  async getProducts(): Promise<Product[]> {
     return await firstValueFrom(
       this.productsClient.send({ cmd: 'get_products' }, {}),
     );
@@ -27,14 +28,14 @@ export class ProductsController {
   @Post()
   async createProduct(
     @Body() createProductDto: CreateProductDto,
-  ): Promise<any> {
+  ): Promise<Product> {
     return await firstValueFrom(
       this.productsClient.send({ cmd: 'create_product' }, createProductDto),
     );
   }
 
   @Delete(':id')
-  async deleteProduct(@Param('id') id: string): Promise<any> {
+  async deleteProduct(@Param('id') id: string): Promise<{ message: string }> {
     return await firstValueFrom(
       this.productsClient.send({ cmd: 'delete_product' }, id),
     );
