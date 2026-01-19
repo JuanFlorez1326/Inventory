@@ -30,9 +30,6 @@ services:
       - PRODUCTS_SERVICE_PORT=3001
     networks:
       - inventory_network
-    volumes:
-      - .:/app
-      - /app/node_modules
 
   products-service:
     build:
@@ -52,9 +49,6 @@ services:
       - DB_DATABASE=inventory_db
     networks:
       - inventory_network
-    volumes:
-      - .:/app
-      - /app/node_modules
 
 volumes:
   postgres_data:
