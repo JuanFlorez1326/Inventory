@@ -84,6 +84,11 @@ npm run start:dev gateway
 
 La API estará disponible en: `http://localhost:3000`
 
+## Documentación (Swagger)
+
+- Gateway / App raíz: `http://localhost:3000/api/swagger`
+- Incluye ejemplos de request/response y schemas de productos.
+
 ## Ejecución con Docker Compose
 
 ```bash
