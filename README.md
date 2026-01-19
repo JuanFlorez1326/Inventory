@@ -84,6 +84,19 @@ npm run start:dev gateway
 
 La API estará disponible en: `http://localhost:3000`
 
+## Tests
+
+```bash
+# Ejecutar todos los tests
+npm test
+
+# Ejecutar tests con cobertura
+npm run test:cov
+
+# Ejecutar tests en modo vigilancia
+npm run test:watch
+```
+
 ## Documentación (Swagger)
 
 - Gateway / App raíz: `http://localhost:3000/api/swagger`
