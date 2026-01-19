@@ -62,6 +62,8 @@ PRODUCTS_SERVICE_PORT=3001
 API_GATEWAY_PORT=3000
 ```
 
+![alt text](env.png)
+
 ## Ejecución Local
 
 ### Opción 1: Sin Docker (Node.js local)
