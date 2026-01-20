@@ -37,9 +37,52 @@ Proyecto para gestionar un inventario de productos usando arquitectura de micros
 
 ## Instalación
 
+**Cuando clones el proyecto por primera vez:**
+
 ```bash
+# 1. Clonar el repositorio (ya hecho)
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Levantar los servicios con Docker
+docker-compose up
+```
+
+El comando `docker-compose up` automáticamente:
+- Construye las imágenes Docker de los servicios
+- Inicia PostgreSQL y espera a que esté listo (healthcheck)
+- Inicia el microservicio de productos
+- Inicia el API Gateway
+
+**Nota**: No necesitas hacer `npm run build` localmente. El build se ejecuta automáticamente dentro de los contenedores Docker.
+
+## Comandos Adicionales
+
+```bash
+# Detener y eliminar contenedores
+docker-compose down
+
+# Detener y eliminar contenedores + volúmenes (base de datos)
+docker-compose down -v
+
+# Ver logs de los servicios
+docker-compose logs -f
+
+# Ver logs de un servicio específico
+docker-compose logs -f products-service
+docker-compose logs -f api-gateway
+
+# Reconstruir y levantar servicios
+docker-compose up --build
+
+# Desarrollo local (sin Docker)
 # Instalar dependencias
 npm install
+
+# Compilar todos los proyectos
+npx nest build gateway
+npx nest build products
 ```
 
 ## Configuración

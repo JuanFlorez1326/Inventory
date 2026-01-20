@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-RUN npx nest build && npx nest build products
+RUN npx nest build products
 
 EXPOSE 3001
 
